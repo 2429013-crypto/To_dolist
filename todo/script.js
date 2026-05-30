@@ -1,45 +1,48 @@
-let tasks= [];
+let tasks = JSON.parse(localStorage.getItem("tasks") || "[]");//if the data exist it will load it and if not it will use simply[] to show empty array
+//let tasks= [];
 const activeContainer = document.getElementById("active-tasks");
-const completedcontainer = document.getElementById("completed-tasks");
+const completedcontainer = document.getElementById("completed-tasks"); 
+render(); 
 
 document.getElementById("taskform").addEventListener("submit", function(event){
 
     event.preventDefault();
     
-    const taskname = document.getElementById("name").value;
-    const date = document.getElementById("date").value;
+   const taskname = document.getElementById("name").value;
+    const date = document.getElementById("date").value; 
     const priority = document.getElementById("priority").value;
-    const comment = document.getElementById("comment").value;
+    const comment = document.getElementById("comment").value;         
+    
+    
     
     // console.log(taskname);
     // console.log(date);
-    // console.log(priority);
-    // console.log(comment);
+    // console.log(priority);  
+    // console.log(comment);  
 
-    tasks.push({
-        name:taskname,
+    tasks.push({                    
+        name:taskname,   
         date:date,
-        priority:priority,
+        priority:priority,                                                   
         comment:comment,
-        status:0,
-    });
-    render();
-});
+        status:0, 
+    }); 
+  localStorage.setItem("tasks",JSON.stringify(tasks)); 
+  document.getElementById("taskform").reset(); 
 
-
-
+   //Json.stringify is used to store 
+    render(); 
+});                                                                  
 function render(){ 
     // console.log(tasks);
-    activeContainer.innerHTML = "";   
+    activeContainer.innerHTML = "";    
     completedcontainer.innerHTML = "";
      
     tasks.forEach((task,index) => {                                
       console.log(task.status);                                            
       if(task.status==0) {    
         activeContainer.innerHTML += `
-        
-
-        <div on class="flex gap-1vw ai-c jc-sb" style="background-color: red;">
+ <div on class="flex gap-1vw ai-c jc-sb" style="background-color: red;">
         <div class="flex gap-1vw ">
 
                 <h3>${task.name}</h3>
@@ -96,12 +99,14 @@ function render(){
 
 function deletetask(index){
     // console.log(tasks); 
-    tasks.splice(index, 1);
+    tasks.splice(index, 1);                    
+    localStorage.setItem("tasks",JSON.stringify(tasks));
     // console.log(tasks);
     render();
-} 
+}  
 function completetask(index){
-    tasks[index].status=1; 
+    tasks[index].status=1;         
+    localStorage.setItem("tasks",JSON.stringify(tasks));
     render(); 
 }                                                      
     function edittask(index){      
@@ -110,6 +115,7 @@ function completetask(index){
       document.getElementById("date").value = task.date; 
       document.getElementById("priority").value = task.priority; 
       document.getElementById("comment").value = task.comment; 
-        tasks.splice(index,1);
-        render(); 
+        tasks.splice(index,1);              
+        localStorage.setItem("tasks",JSON.stringify(tasks)); 
+        render();  
     }                                                       
