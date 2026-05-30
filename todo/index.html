@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo App</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-container">
+    <h1>todo list</h1>
+    <form class="flex gap-1vw" id="taskform">
+        <div class="flex flex-col">
+            <label for="task-name">Name of the task</label>
+            <input type="text" name="task-name" id="name">
+        </div>
+        <div class="flex flex-col">
+            <label for="task-date-time">Date of the task</label>
+            <input type="datetime" name="task-date-time" id="date">
+        </div>
+        <div class="flex flex-col">
+            <label for="priority">Priority of the task</label>
+            <select name="priority" id="priority">
+                <option value="1">High </option>
+                <option value="2">Mid</option>
+                <option value="3">Low</option>
+            </select>
+        </div>
+        <div class="flex flex-col">
+            <label for="task-name">Comment for the task</label>
+            <input type="text" name="comment" id="comment">
+        </div>
+        <button type="submit">submit</button>
+    </form>
+
+    <section>
+        <h2>
+            Active Tasks
+        </h2>
+        <div id="active-tasks" class="flex flex-col gap-1vw">
+            <!-- <div class="flex gap-1vw ai-c jc-sb" style="background-color: red;">
+                <div class="flex gap-1vw ">
+                    <h3>task name</h3>
+                    <h3>00/00/0000</h3>
+                    <h3>priority</h3>
+                    <h3>comment</h3>
+                </div>
+                <div>
+                    <button>edit</button>
+                    <button>delete</button>
+                    <button>completed</button>
+                </div>
+            </div> -->
+        </div>
+    </section>
+    <section>
+        <h2>
+            completed tasks
+        </h2>
+        <div id="completed-tasks" class="flex flex-col gap-1vw">
+            <!-- <div class="flex gap-1vw" style="background-color: blue; color: wheat;">
+                <h3>task name</h3>
+                <h3>00/00/0000</h3>
+                <h3>priority</h3>
+                <h3>comment</h3>
+            </div> -->
+        </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html> 
