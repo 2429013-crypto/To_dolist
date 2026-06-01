@@ -12,22 +12,19 @@ document.getElementById("taskform").addEventListener("submit", function(event){
     const date = document.getElementById("date").value; 
     const priority = document.getElementById("priority").value;
     const comment = document.getElementById("comment").value;         
-    
-    
-    
     // console.log(taskname);
     // console.log(date);
-    // console.log(priority);  
+    // console.log(priority);                                                                                                   
     // console.log(comment);  
 
     tasks.push({                    
         name:taskname,   
-        date:date,
-        priority:priority,                                                   
+        date:date,                  
+        priority:priority,                                                               
         comment:comment,
         status:0, 
     }); 
-  localStorage.setItem("tasks",JSON.stringify(tasks)); 
+  localStorage.setItem("tasks",JSON.stringify(tasks));                                                        
   document.getElementById("taskform").reset(); 
 
    //Json.stringify is used to store 
@@ -35,21 +32,31 @@ document.getElementById("taskform").addEventListener("submit", function(event){
 });                                                                  
 function render(){ 
     // console.log(tasks);
-    activeContainer.innerHTML = "";    
+    activeContainer.innerHTML = "";//to clear the container before rendering the tasks again  
     completedcontainer.innerHTML = "";
      
-    tasks.forEach((task,index) => {                                
-      console.log(task.status);                                            
+    tasks.forEach((task,index) => {                                 
+    // console.log(task.status);                
+      let color = "lightblue"; //default 
+      if(task.priority == "High") {
+        color = "red"; 
+      } 
+      else if(task.priority == "Mid") { 
+        color = "orange";  
+      }                     
+      else if(task.priority == "Low") {
+        color = "yellow";  
+      }                                      
       if(task.status==0) {    
         activeContainer.innerHTML += `
- <div on class="flex gap-1vw ai-c jc-sb" style="background-color: red;">
+ <div on class="flex gap-1vw ai-c jc-sb" style="background-color: ${color};">
         <div class="flex gap-1vw ">
 
                 <h3>${task.name}</h3>
 
                 <h3>${task.date}</h3>
 
-                <h3>${task.priority}</h3>
+                <h3>${task.priority}</h3>                              
 
                 <h3>${task.comment}</h3>
                 
@@ -62,39 +69,32 @@ function render(){
                 
                 </div>
                 
-        `;
+        `;  
+      }                                                                                                 
+      else if(task.status==1) {  
+          completedcontainer.innerHTML += `              
 
-      } 
-      else if(task.status==1) {
-          completedcontainer.innerHTML += `
-        
           
-        <div on class="flex gap-1vw ai-c jc-sb" style="background-color: blue;"> 
-        <div class="flex gap-1vw ">
-
-                <h3>${task.name}</h3>
-
-                <h3>${task.date}</h3>
-
-                <h3>${task.priority}</h3>
-                
-                <h3>${task.comment}</h3>
-
-                </div>
-                
-                </div>
-                
-                `;
-            } 
+          
+          <div on class="flex gap-1vw ai-c jc-sb" style="background-color: ${color};"> 
+          <div class="flex gap-1vw ">
+          
+          <h3>${task.name}</h3> 
+          
+          <h3>${task.date}</h3>
+          
+          <h3>${task.priority}</h3>
+          
+          <h3>${task.comment}</h3>
+          
+          </div>
+          
+          </div>
+          
+          `;
+        } 
+    });                   
      
-        
-            
-            
-
-     });
-
-
-
 }
 
 function deletetask(index){
